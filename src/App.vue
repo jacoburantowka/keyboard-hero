@@ -22,7 +22,7 @@ export default {
 
 <style>
 body {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgb(0, 0, 0, 0.9);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
   display: flex;
