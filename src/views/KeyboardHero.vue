@@ -1,5 +1,8 @@
 <template>
     <v-container class="keyboard">
+      <!-- TODO: QWERTY, QWERTZ, and AZERTY functions. -->
+      <!-- TODO: 'You failed' emoji state. -->
+      <!-- TODO: Colourblind friendly colouring-->
       <ul class="row row-0">
         <li class="pinky" id="esc">ESC</li>
         <li class="pinky" id="1">1</li>
@@ -7,7 +10,7 @@
         <li class="middle" id="3">3</li>
         <li class="pointer" id="4">4</li>
         <li class="pointer" id="5">5</li>
-        <li class="pointer selected" id="6">6</li>
+        <li class="pointer" id="6">6</li>
         <li class="pointer" id="7">7</li>
         <li class="middle" id="8">8</li>
         <li class="ring" id="9">9</li>
@@ -38,7 +41,7 @@
         <li class="ring" id="S">S</li>
         <li class="middle" id="D">D</li>
         <li class="pointer" id="F">F</li>
-        <li class="pointer" id="G">G</li>
+        <li class="pointer selected" id="G">G</li>
         <li class="pointer" id="H">H</li>
         <li class="pointer" id="J">J</li>
         <li class="middle" id="K">K</li>
@@ -65,13 +68,21 @@
 </template>
 
 <script>
+
+
 export default {
-  name: "KeyboardHero"
+  name: "KeyboardHero",
+  data() {
+    return {
+      keyboardType: {},
+      keys: [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
+    }
+  }
 }
 </script>
 
-<style scoped>
 
+<style scoped>
 /* GENERIC KEYBOARD STYLINGS */
 .keyboard {
   display: flex;
@@ -163,8 +174,8 @@ li {
 
 .selected {
   background-color: transparent;
-  -webkit-animation: vibrate-1 0.3s linear infinite both;
-  animation: vibrate-1 0.3s linear infinite both;
+  -webkit-animation: vibrate-1 0.5s linear infinite both;
+  animation: vibrate-1 0.5s linear infinite both;
 }
 
 /* ANIMATIONS */
