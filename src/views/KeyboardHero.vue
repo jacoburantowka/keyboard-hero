@@ -1,98 +1,62 @@
 <template>
     <v-container class="keyboard">
-      <ul v-for="row in keyboard" :key="row" class="row row-1">
-        <li v-for="item in row"
-            :key="item"
+      <ul class="row row-1">
+        <li v-for="item in TopRow" :key="item.letter"
             :class="item.finger"
             :id="item.letter"
             :style="{width: item.sizing}"
-        >{{ item.letter }}</li>
+        >{{ item.letter }} </li>
+      </ul>
+      <ul class="row row-2">
+        <li v-for="item in UpperRow" :key="item.letter"
+            :class="item.finger"
+            :id="item.letter"
+            :style="{width: item.sizing}"
+        >{{ item.letter }} </li>
+      </ul>
+      <ul class="row row-3">
+        <li v-for="item in LowerRow" :key="item.letter"
+            :class="item.finger"
+            :id="item.letter"
+            :style="{width: item.sizing}"
+        >{{ item.letter }} </li>
+      </ul>
+      <ul class="row row-4">
+        <li v-for="item in BottomRow" :key="item.letter"
+            :class="item.finger"
+            :id="item.letter"
+            :style="{width: item.sizing}"
+        >{{ item.letter }} </li>
       </ul>
     </v-container>
 </template>
 
 <script>
-
+import keyboardContent from '../static/keyboardContent.json'
 
 export default {
   name: "KeyboardHero",
   data () {
     return {
-       keyboard: {
-        row: [
-            {
-              letter: 'TAB',
-              finger: 'pinky',
-              sizing: '5em'
-            },
-          {
-               letter: 'Q',
-               finger: 'pinky',
-               sizing: '3em'
-             },
-             {
-               letter: 'W',
-               finger: 'ring',
-               sizing: '3em'
-             },
-             {
-               letter: 'E',
-               finger: 'middle',
-               sizing: '3em'
-             },
-            {
-              letter: 'R',
-              finger: 'pointer',
-              sizing: '3em'
-            },
-            {
-              letter: 'T',
-              finger: 'pointer',
-              sizing: '3em'
-            },
-            {
-              letter: 'Y',
-              finger: 'pointer',
-              sizing: '3em'
-            },
-            {
-              letter: 'U',
-              finger: 'pointer',
-              sizing: '3em'
-            },
-            {
-              letter: 'I',
-              finger: 'middle',
-              sizing: '3em'
-            },
-            {
-              letter: 'O',
-              finger: 'ring',
-              sizing: '3em'
-            },
-            {
-              letter: 'P',
-              finger: 'pinky',
-              sizing: '3em'
-            },
-            {
-              letter: '[',
-              finger: 'pinky',
-              sizing: '3em'
-            },
-            {
-              letter: ']',
-              finger: 'pinky',
-              sizing: '3em'
-            },
-            {
-              letter: '\\',
-              finger: 'pinky',
-              sizing: '3em'
-            },
-           ]
-       }
+      keyboard: keyboardContent
     }
+  },
+  created() {
+    console.log(this.keyboard)
+  },
+  computed: {
+    TopRow () {
+      return this.keyboard.filter(key => key.row === 1).sort((x, y) => x.rowIndex - y.rowIndex)
+    },
+    UpperRow () {
+      return this.keyboard.filter(key => key.row === 2).sort((x, y) => x.rowIndex - y.rowIndex)
+    },
+    LowerRow () {
+      return this.keyboard.filter(key => key.row === 3).sort((x, y) => x.rowIndex - y.rowIndex)
+    },
+    BottomRow () {
+      return this.keyboard.filter(key => key.row === 4).sort((x, y) => x.rowIndex - y.rowIndex)
+    },
   }
 }
 </script>
