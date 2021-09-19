@@ -32,30 +32,27 @@
 </template>
 
 <script>
-import keyboardContent from '../static/keyboardContent.json'
+import QWERTY_keyboardContent from '../static/QWERTY_keyboardContent.json'
 
 export default {
   name: "KeyboardHero",
   data () {
     return {
-      keyboard: keyboardContent
+      QWERTY: QWERTY_keyboardContent
     }
-  },
-  created() {
-    console.log(this.keyboard)
   },
   computed: {
     TopRow () {
-      return this.keyboard.filter(key => key.row === 1).sort((x, y) => x.rowIndex - y.rowIndex)
+      return this.QWERTY.filter(key => key.row === 1).sort((x, y) => x.rowIndex - y.rowIndex)
     },
     UpperRow () {
-      return this.keyboard.filter(key => key.row === 2).sort((x, y) => x.rowIndex - y.rowIndex)
+      return this.QWERTY.filter(key => key.row === 2).sort((x, y) => x.rowIndex - y.rowIndex)
     },
     LowerRow () {
-      return this.keyboard.filter(key => key.row === 3).sort((x, y) => x.rowIndex - y.rowIndex)
+      return this.QWERTY.filter(key => key.row === 3).sort((x, y) => x.rowIndex - y.rowIndex)
     },
     BottomRow () {
-      return this.keyboard.filter(key => key.row === 4).sort((x, y) => x.rowIndex - y.rowIndex)
+      return this.QWERTY.filter(key => key.row === 4).sort((x, y) => x.rowIndex - y.rowIndex)
     },
   }
 }
@@ -90,29 +87,8 @@ li {
   font-size: 1em;
 }
 
-/* SPECIAL KEYS STYLINGS */
-#tab {
-  width: 5em;
-}
-
-#caps {
-  width: 6em;
-}
-
-#left-shit {
-  width: 8em;
-}
-
-#enter {
-  width: 6em;
-}
-
 #right-shift {
   width: 8em;
-}
-
-#back {
-  width: 5em;
 }
 
 /* HAND POSITION COLOURING */
