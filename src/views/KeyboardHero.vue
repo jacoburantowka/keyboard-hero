@@ -1,5 +1,5 @@
 <template>
-    <v-container class="keyboard" @click="setRandomKey()">
+    <v-container class="keyboard">
       <KeyboardRow :row="TopRow" :current-key="currentKey"/>
       <KeyboardRow :row="UpperRow" :current-key="currentKey"/>
       <KeyboardRow :row="LowerRow" :current-key="currentKey"/>
@@ -18,10 +18,11 @@ export default {
     return {
       targetableKeys: [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"],
       currentKey: '',
+      pressedKey: '',
       QWERTY: QWERTY_keyboardContent
     }
   },
-  created() {
+  created () {
     this.setRandomKey()
   },
   computed: {
@@ -38,6 +39,11 @@ export default {
       return this.QWERTY.filter(key => key.row === 4).sort((x, y) => x.rowIndex - y.rowIndex)
     }
   },
+  mounted () {
+    window.addEventListener("keypress", (e) => {
+      this.pressedKey = e.key
+    })
+  },
   methods: {
     getRandomNumber (min, max) {
       min = Math.ceil(min)
@@ -46,7 +52,13 @@ export default {
     },
     setRandomKey () {
       this.currentKey = this.targetableKeys[this.getRandomNumber(0, this.targetableKeys.length - 1)]
-      console.log(this.currentKey)
+    },
+  },
+  watch: {
+    pressedKey: function () {
+      if (this.pressedKey.toUpperCase() === this.currentKey) {
+        this.setRandomKey()
+      }
     }
   }
 }
