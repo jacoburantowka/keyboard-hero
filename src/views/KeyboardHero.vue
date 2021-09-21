@@ -44,6 +44,11 @@ export default {
       this.pressedKey = e.key
     })
   },
+  beforeUnmount () {
+    window.removeEventListener("keypress", (e) => {
+      this.pressedKey = e.key
+    })
+  },
   methods: {
     getRandomNumber (min, max) {
       min = Math.ceil(min)
