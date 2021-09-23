@@ -1,5 +1,6 @@
 <template>
     <v-container class="keyboard">
+      <v-btn @click="changeKeyboardLayout()">UwU</v-btn>
       <KeyboardRow :row="TopRow" :current-key="currentKey"/>
       <KeyboardRow :row="UpperRow" :current-key="currentKey"/>
       <KeyboardRow :row="LowerRow" :current-key="currentKey"/>
@@ -8,7 +9,9 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
 import QWERTY_keyboardContent from '../static/QWERTY_keyboardContent.json'
+import AZERTY_keyboardContent from '../static/AZERTY_keyboardContent.json'
 import KeyboardRow from "../components/KeyboardRow";
 
 export default {
@@ -19,7 +22,7 @@ export default {
       targetableKeys: [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"],
       currentKey: '',
       pressedKey: '',
-      QWERTY: QWERTY_keyboardContent
+      currentLayout: QWERTY_keyboardContent
     }
   },
   created () {
@@ -27,16 +30,16 @@ export default {
   },
   computed: {
     TopRow () {
-      return this.QWERTY.filter(key => key.row === 1).sort((x, y) => x.rowIndex - y.rowIndex)
+      return this.currentLayout.filter(key => key.row === 1).sort((x, y) => x.rowIndex - y.rowIndex)
     },
     UpperRow () {
-      return this.QWERTY.filter(key => key.row === 2).sort((x, y) => x.rowIndex - y.rowIndex)
+      return this.currentLayout.filter(key => key.row === 2).sort((x, y) => x.rowIndex - y.rowIndex)
     },
     LowerRow () {
-      return this.QWERTY.filter(key => key.row === 3).sort((x, y) => x.rowIndex - y.rowIndex)
+      return this.currentLayout.filter(key => key.row === 3).sort((x, y) => x.rowIndex - y.rowIndex)
     },
     BottomRow () {
-      return this.QWERTY.filter(key => key.row === 4).sort((x, y) => x.rowIndex - y.rowIndex)
+      return this.currentLayout.filter(key => key.row === 4).sort((x, y) => x.rowIndex - y.rowIndex)
     }
   },
   mounted () {
@@ -58,6 +61,13 @@ export default {
     setRandomKey () {
       this.currentKey = this.targetableKeys[this.getRandomNumber(0, this.targetableKeys.length - 1)]
     },
+    changeKeyboardLayout () {
+      if (this.currentLayout === QWERTY_keyboardContent) {
+        this.currentLayout = AZERTY_keyboardContent
+      } else if (this.currentLayout === AZERTY_keyboardContent) {
+        this.currentLayout = QWERTY_keyboardContent
+      }
+    }
   },
   watch: {
     pressedKey: function () {
