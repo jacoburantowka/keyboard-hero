@@ -1,6 +1,5 @@
 <template>
     <v-container class="keyboard">
-      <v-btn @click="changeKeyboardLayout()">UwU</v-btn>
       <KeyboardRow :row="TopRow" :current-key="currentKey"/>
       <KeyboardRow :row="UpperRow" :current-key="currentKey"/>
       <KeyboardRow :row="LowerRow" :current-key="currentKey"/>
@@ -9,9 +8,7 @@
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
 import QWERTY_keyboardContent from '../static/QWERTY_keyboardContent.json'
-import AZERTY_keyboardContent from '../static/AZERTY_keyboardContent.json'
 import KeyboardRow from "../components/KeyboardRow";
 
 export default {
@@ -60,13 +57,6 @@ export default {
     },
     setRandomKey () {
       this.currentKey = this.targetableKeys[this.getRandomNumber(0, this.targetableKeys.length - 1)]
-    },
-    changeKeyboardLayout () {
-      if (this.currentLayout === QWERTY_keyboardContent) {
-        this.currentLayout = AZERTY_keyboardContent
-      } else if (this.currentLayout === AZERTY_keyboardContent) {
-        this.currentLayout = QWERTY_keyboardContent
-      }
     }
   },
   watch: {
